@@ -6,4 +6,5 @@ interface ParkingSpace {
     isAvailable: boolean;
     reservedBy?: string;
     rating: number;
+    parkingRate: number;
 }
