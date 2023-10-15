@@ -8,8 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import LotList from '../components/LotList';
 import ParkingLotModal from '../components/ParkingLotModal';
 import FilterModal from '../components/filterModal';
-import ListingService from 'BE/src/services/ListingService';
-import Listing from 'BE/src/models/Listing';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -111,15 +110,14 @@ const PickLot = () => {
 }
 
 const Home = ({ user, refetch }: IHome) => {
-    const listingService = new ListingService();
     const isFocused = useIsFocused();
     const [isLoading, setLoading] = useState(false);
     const [selectedParkinglot, setSelectedParkingLot] = useState<string | undefined>()
-    const [data, setData] = useState(
-    listingService.getListings().then((res: Listing[]) => {
-        setData(res);
-    }));
-    
+    const [data, setData] = useState(axios.get('http://localhost:8000/routes/listing').then
+        ((res) => {
+            console.log(res.data)
+            return res.data
+        }));
     const [isParkingLotModalOpen, setIsParkingLotModalOpen] = useState(false);
 
 
