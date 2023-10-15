@@ -1,11 +1,14 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "target": "es2017",
-    "module": "es2022",
+  "compilerOptions": {                        
+    "target": "es6",                               
+    "module": "commonjs",                           
+    "outDir": "./dist",                             
+    "rootDir": "./src",                             
+    "strict": false,
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist"
+    "esModuleInterop": true,                       
   },
-  "lib": ["es2015"]
+  "exclude":[
+    "./node_modules"
+  ]
 }

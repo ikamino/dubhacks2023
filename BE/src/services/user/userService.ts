@@ -1,5 +1,5 @@
-import { Listing } from "../../models/Listing";
-import { UserServiceInterface } from "./userServiceInterface";
+import { Listing } from "../../models/Listing.js";
+import { UserServiceInterface } from "./userServiceInterface.js";
 import axios from "axios";
 
 export class UserService implements UserServiceInterface {

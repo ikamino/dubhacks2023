@@ -1,9 +1,10 @@
-import { Router } from 'express';
-import { listListings, createListing, deleteListing, updateListing } from '../../controllers/listing';
-const router = Router();
-router.route("/").get(listListings);
-router.route("/").post(createListing);
-router.route("/:id").delete(deleteListing);
-router.route("/").put(updateListing);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const listing_js_1 = require("../../controllers/listing.js");
+const router = (0, express_1.Router)();
+router.route("/").get(listing_js_1.listListings);
+router.route("/").post(listing_js_1.createListing);
+router.route("/:id").delete(listing_js_1.deleteListing);
+router.route("/").put(listing_js_1.updateListing);
 module.exports = router;
-//# sourceMappingURL=listing.js.map

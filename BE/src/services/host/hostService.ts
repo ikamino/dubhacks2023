@@ -1,7 +1,8 @@
-import { Listing } from "../../models/Listing";
-import { HostServiceInterface } from "./hostServiceInterface";
+import { Listing } from "../../models/Listing.js";
+import { HostServiceInterface } from "./hostServiceInterface.js";
+
 import axios from 'axios';
-class HostService implements HostServiceInterface {
+export class HostService implements HostServiceInterface {
     async createListing(listing: Listing): Promise<Listing> {
         try {
             const createdListing = await axios.post('api/routes/listing', listing);

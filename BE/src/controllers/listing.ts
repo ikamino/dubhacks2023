@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import Listing from '../models/Listing';
-
-const BASE_URL = 'http://localhost:3000'; // replace with your MongoDB server URL
+import Listing from '../models/Listing.js';
 
 
 export const listListings = async (req: Request, res: Response) => {
@@ -13,7 +11,6 @@ export const listListings = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
 
 export const createListing = async (req: Request, res: Response) => {
   try {

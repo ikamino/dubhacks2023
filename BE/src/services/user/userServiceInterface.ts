@@ -1,4 +1,4 @@
-import { Listing } from "../../models/Listing";
+import { Listing } from "../../models/Listing.js";
 
 export interface UserServiceInterface {
     getBooking(bookingId: string, userId: string): Promise<Listing>;
