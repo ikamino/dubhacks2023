@@ -27,8 +27,10 @@ const mockListing = {
   description: "This is a parking space"
 }
 
-let listingService = new ListingService();
-
-listingService.createListing(mockListing).then((listing) => {
-  console.log(listing);
+import axios from "axios";
+const listing = axios.get(`http://localhost:8000/routes/listing`).then((res) => {
+  console.log(res.data);
 });
+
+
+
