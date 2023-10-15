@@ -22,6 +22,7 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('user1'); 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState({
@@ -42,6 +43,7 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
 
   const fetchParkingLot = async () => {
     setRefreshing(true);
+    // const res = await listing.getListing(id)
     // const res = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/api/user-notifications/${user}`)
     const res = {
         id: 'lot3', 
