@@ -3,6 +3,7 @@ import { FlatList, Text, View, StyleSheet, Image, TouchableOpacity } from 'react
 import { ParkingSpace } from '../types/types';
 import Star from '../icons/star.svg'
 import Location from '../icons/Location.svg'
+import { DayTermTag, LongTermTag, LotTag, MonthTermTag, ShortTermTag, WeekTermTag, returnTag } from './Tags';
 
 
 interface ILotList {
@@ -105,24 +106,11 @@ const LotList = ({ lots, selectLot }: ILotList) => {
                             <View style={styles.lotCardContent}>
                                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 4}}>
                                     <Location width={'15'} height={'17'} />
-                                    <Text style={{marginLeft: 8, fontSize: 15, fontWeight: '500'}}>
+                                    <Text style={{marginLeft: 8, fontSize: 15, fontWeight: '500', marginRight: 8}}>
                                         {item.address}
                                     </Text>
-                                    <View style={{
-                                        backgroundColor: '#D1FDC2', 
-                                        width: 72, 
-                                        height: 22, 
-                                        borderRadius: 50,
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        marginLeft: 6
-                                    }} >
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontWeight: '500'
-                                        }}>
-                                            Short-term
-                                        </Text>
+                                    <View style={{display: 'flex', flexDirection: 'row', gap: 4}}>
+                                        {item.tags.map((tag) => returnTag(tag))}
                                     </View>
                                 </View>
                                 <Text style={styles.lotCardTitle}>{item.title}</Text>

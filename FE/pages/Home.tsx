@@ -73,33 +73,36 @@ const lots = [
         address: 'Seattle, Washington',
         pricePerHour: 13,
         isAvailable: true,
-        rating: 5.0,
-        parkingRate: 13,
-        description: 'The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience.'
+        rating: 3.7,
+        parkingRate: 5,
+        description: 'The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience.',
+        tags: ['short', 'lot']
     },
     {
         id: 'lot2', 
-        title: 'lot2',
-        imagein: 'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        title: 'Parking near Husky stadium 5 min walk',
+        imagein: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?cs=srgb&dl=pexels-binyamin-mellish-106399.jpg&fm=jpg',
         hostId: 'lot2', 
-        address: 'lot2',
-        pricePerHour: 15,
+        address: 'University of Washington. Washington',
+        pricePerHour: 35,
         isAvailable: true,
-        rating: 5.0,
-        parkingRate: 15,
-        description: 'hihi'
+        rating: 4.6,
+        parkingRate: 35,
+        description: 'hihi',
+        tags: ['Day']
     },
     {
         id: 'lot3', 
-        title: 'lot3',
-        imagein: "https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        title: 'Cute house near kits beach',
+        imagein: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bHV4dXJ5JTIwaG91c2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
         hostId: 'lot3', 
-        address: 'lot3',
+        address: 'Vancouver, BC',
         pricePerHour: 14,
         isAvailable: true,
-        rating: 5.0,
-        parkingRate: 14,
-        description: 'aokfmef'
+        rating: 4.9,
+        parkingRate: 9,
+        description: 'aokfmef',
+        tags: ['month', 'long']
     },
 ]
 
