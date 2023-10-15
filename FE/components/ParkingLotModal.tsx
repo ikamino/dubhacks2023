@@ -56,32 +56,30 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
   const [selectedDuration, setSelectedDuration] = useState<string>("0");
 
   const fetchParkingLot = async () => {
+    // const listingService = new ListingService();
     setRefreshing(true);
-    const listings = await axios.get("http://localhost:8000/routes/listing")
-
-    for (const listing of listings.data) {
-      if (listing.id === id) {
-        setData(listing)
-        setRefreshing(false)
-        return
-      }
-    }
+    // const res = await listingService.getListing(id)
     // const res = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/api/user-notifications/${user}`)
-    const res = {
-      id: "lot3",
-      title: "lot3",
-      imagein:
-        "https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-      hostId: "lot3",
-      address: "Seattle, Washington",
-      pricePerHour: 14,
-      isAvailable: true,
-      rating: 5.0,
-      parkingRate: 14,
-      description:
-        "The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience.",
-    };
+  //   const res = {
+  //     id: "lot3",
+  //     title: "lot3",
+  //     imagein:
+  //       "https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  //     hostId: "lot3",
+  //     address: "Seattle, Washington",
+  //     pricePerHour: 14,
+  //     isAvailable: true,
+  //     rating: 5.0,
+  //     parkingRate: 14,
+  //     description:
+  //       "The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience.",
+  //   };
 
+  //   if (res) {
+  //     setData(res);
+  //     setRefreshing(false);
+  //   }
+  };
 
   useEffect(() => {
     fetchParkingLot();
@@ -91,25 +89,11 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
     // fetchParkingLot()
   }, []);
 
-
-  const handleFormSubmit = async () => {
-    const listings = await axios.get("http://localhost:8000/routes/listing")
-    let updateListing
-    for (const listing of listings.data) {
-      if (listing.id === id) {
-        updateListing = listing
-        break
-      }
-    }
-
-    updateListing.isAvailable = false
-    updateListing.userID = userId
-       
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
-    return await axios.put(`http://localhost:8000/routes/listing`, updateListing)
-
+  const handleFormSubmit = () => {
+    // You can handle form submission here, for example, by sending the data to an API or performing some action.
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Phone Number:", phoneNumber);
   };
 
   return (

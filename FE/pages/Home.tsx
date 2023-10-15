@@ -8,7 +8,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import LotList from '../components/LotList';
 import ParkingLotModal from '../components/ParkingLotModal';
 import FilterModal from '../components/filterModal';
-
+// import ListingService from 'BE/src/services/ListingService';
+// import Listing from 'BE/src/models/Listing';
 
 const styles = StyleSheet.create({
     container: {
@@ -82,7 +83,7 @@ const lots = [
         title: 'Parking near Husky stadium 5 min walk',
         imagein: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?cs=srgb&dl=pexels-binyamin-mellish-106399.jpg&fm=jpg',
         hostId: 'lot2', 
-        address: 'University of Washington. Washington',
+        address: 'University of Washington',
         pricePerHour: 35,
         isAvailable: true,
         rating: 4.6,
@@ -113,11 +114,8 @@ const Home = ({ user, refetch }: IHome) => {
     const isFocused = useIsFocused();
     const [isLoading, setLoading] = useState(false);
     const [selectedParkinglot, setSelectedParkingLot] = useState<string | undefined>()
-    const [data, setData] = useState(axios.get('http://localhost:8000/routes/listing').then
-        ((res) => {
-            console.log(res.data)
-            return res.data
-        }));
+    // const [data, setData] = useState(res);
+    
     const [isParkingLotModalOpen, setIsParkingLotModalOpen] = useState(false);
 
 
