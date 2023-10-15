@@ -11,14 +11,15 @@ const hostRepository = AppDataSource.getRepository(Host);
 export const displayListing = async (req: Request, res: Response) => {
     try {
         const listings = await listingRepository.find();
-        res.json(listings);
+        return res.json(listings);
     } catch (error) {
-        res.status(500).json({message: "Error retrieving listings."});
+        console.log(error)
+        return res.status(500).json({message: "Error retrieving listings."});
     }
 };
 
 export const deleteListing = async (req: Request, res: Response) => {
-    const listingID = parseInt(req.params.listingID);
+    const listingID = Number(req.params.listingID);
     const listing = await listingRepository.findOneBy({
         id: listingID
     });
@@ -50,24 +51,26 @@ export const deleteListing = async (req: Request, res: Response) => {
       }
 
       await listingRepository.remove(listing);
-      res.send("Listing deleted successfully.");
+      return res.send("Listing deleted successfully.");
 };
 
 export const createListing = async (req: Request, res: Response) => {
+    console.log(req.body)
     try {
         const listing = listingRepository.create({
             ...req.body,
-            userID: parseInt(req.body.userID),
-            hostID: parseInt(req.body.hostID),
-            pricePerHour: parseInt(req.body.rating)
+            userID: Number(req.body.userID),
+            hostID: Number(req.body.hostID),
+            pricePerHour: Number(req.body.pricePerHour),
+            rating: Number(req.body.rating)
         });
 
         const user = await userRepository.findOneBy({
-            id: parseInt(req.body.userID)
+            id: Number(req.body.userID)
         });
 
         const host = await hostRepository.findOneBy({
-            id: parseInt(req.body.hostID)
+            id: Number(req.body.hostID)
         });
 
         await listingRepository.save(listing);
@@ -77,24 +80,23 @@ export const createListing = async (req: Request, res: Response) => {
 
         await userRepository.save(user);
         await hostRepository.save(host);
-        res.json(listing);
+        return res.json(listing);
     } catch (error) {
-        res.status(500).json({ error: "Failed to create a listing." });
     }
 };
 
 export const updateListing = async (req: Request, res: Response) => {
     try {
         const listing = await listingRepository.findOneBy({
-            id: parseInt(req.params.listingID)
+            id: Number(req.params.listingID)
         });
 
         const user = await userRepository.findOneBy({
-            id: parseInt(req.body.userID)
+            id: Number(req.body.userID)
         });
 
         const host = await hostRepository.findOneBy({
-            id: parseInt(req.body.hostID)
+            id: Number(req.body.hostID)
         });
 
         const userIndex = user.bookings.findIndex(
@@ -112,8 +114,9 @@ export const updateListing = async (req: Request, res: Response) => {
         await hostRepository.save(host);
         await listingRepository.save(listing);
 
-        res.status(500).json({error: "Failed to edit listing."});
+        return res.status(500).json({error: "Failed to edit listing."});
     } catch (error) {
+        console.log(error)
         return res.status(404).json({ error: "Listing not found" });
     }
 };

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9b045d957b919a4654d9b50aa68b9f47b4419c01
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("listings")
@@ -31,4 +35,17 @@ export class Listing {
 
     @Column()
     description: string;
+<<<<<<< HEAD
+=======
+import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity("listings")
+export class listing {
+    @PrimaryGeneratedColumn()
+    id: number
+
+    
+>>>>>>> 4ef80f1 (done)
+=======
+>>>>>>> 9b045d957b919a4654d9b50aa68b9f47b4419c01
 }
