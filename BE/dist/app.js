@@ -5,7 +5,7 @@ const test_js_1 = require("./test.js");
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const port = 3000;
+const port = 8000;
 const uri = 'mongodb+srv://ikamino:6cIQ08LdpaKdnnov@dubhacks2023.vjneweq.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(uri, {
     useNewUrlParser: true,
