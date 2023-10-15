@@ -5,7 +5,9 @@
       "module": "commonjs",
       "moduleResolution": "node",
       "sourceMap": true,
-      "outDir": "dist"
+      "outDir": "dist",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
     },
     "lib": ["es2015"]
   }
