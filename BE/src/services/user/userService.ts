@@ -1,35 +1,48 @@
-import { Booking } from "../../models/Booking";
 import { Listing } from "../../models/Listing";
 import { UserServiceInterface } from "./userServiceInterface";
 import axios from "axios";
 
 export class UserService implements UserServiceInterface {
     // we just get all listings: 
-    async getBooking(bookingId: string, userId: string): Promise<Booking> {
+    async getBooking(userId: string): Promise<Listing> {
+        try {
+            const response = await axios.get('/api/routes/listing');
+            const data = JSON.parse(response.data);
+            const booking = data => 
+                data.forEach(element => {
+                    if (element.userId === userId) {
+                        return element;
+                    }
+                });
+            return booking(data);
+        } catch (error) {
+            console.error(error);
+            throw new Error('Failed to get booking');
+        }
+    }
+    async bookListing(listingId: string, startTime: Date, endTime: Date, userId: string): Promise<Listing> {
+        // update listing so that isAvailable is false
         const response = await axios.get('/api/routes/listing');
         const data = JSON.parse(response.data);
-        const booking = data => 
-            data.forEach(element => {
-                if (element.id === bookingId) {
-                    return element;
-                }
-            });
-        return booking(data);
+        const listing = (data, listingId) => {
+            const foundListing: Listing | undefined = data.find((element) => element.id === listingId);
+            return foundListing;
+          };
+        if (listing(data, listingId) === undefined) {
+            throw new Error('Listing not found');
+        }
+        const update = await axios.put('/api/routes/listing', {
+            id: listingId,
+            isAvailable: false
+        });
+
+        return update.data;
     }
 
-    async bookListing(listingId: string, startTime: Date, endTime: Date, userId): Promise<Booking> {
-        const booking = await axios.post('/api/routes/listing', {
-            id: listingId,
-            reservedBy: userId,
-            listingId: listingId,
-            startTime: startTime,
-            endTime: endTime
-        });
-        return booking.data;
-    }
 }
 
-function populateBookings(data: Listing[], userId: string): Booking[] {
+
+function populateBookings(data: Listing[], userId: string): Listing[] {
     let listingMatches: Listing[] = [];
     data.forEach(element => {
         if (element.userId === userId) {
@@ -37,14 +50,5 @@ function populateBookings(data: Listing[], userId: string): Booking[] {
         }
     }); 
 
-    return listingMatches.map(booking => {
-        const newBooking: Booking = {
-            id: booking.id,
-            reservedBy: booking.reservedBy, 
-            startDate: booking.startDate,
-            endDate: booking.endDate,
-            totalPrice: booking.totalPrice
-        };
-        return newBooking;
-    });
+    return listingMatches;
 }

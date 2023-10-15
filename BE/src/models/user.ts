@@ -1,7 +1,7 @@
-import { Booking } from "./Booking";
+import { Listing } from "./Listing";
 
 interface User {
     id: string;
-    bookings: Booking[];
+    bookings: Listing[];
 }
 
