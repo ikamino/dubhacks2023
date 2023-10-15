@@ -1,44 +1,14 @@
-const express = require('express');
-const redis = require('redis');
-const { createClient } = redis;
-
+import { AppDataSource } from "./database/index";
+const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const REDIS_HOST = "127.0.0.1";
-  
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
+const port = 8000;
 
-const client = redis.createClient({
-    socket: {
-      port: REDIS_PORT,
-      host: REDIS_HOST,
-    }
-});
+AppDataSource.initialize()
+  .then(() => console.log("CockroachDB connected"))
+  .catch((e) => console.log(e));
 
-(async () => {
-    await client.connect();
-})();
-  
-console.log("Attempting to connect to redis");
-client.on('connect', () => {
-    console.log('Connected to Redis!');
-});
-
-client.on("error", (error) => {
-    console.log("Are you running the Redis server: redis-server");
-    console.log(`Error:${error}`);
-});
-
-// Set up middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Set up routes
-app.get('/', (req, res) => {
-    res.send('Welcome to the Airbnb-type application!');
-});
+app.use("/routes/listing", require("./routes/listing"));
 
-module.exports = redis;
+app.listen(port, () => console.log(`Server running on Port ${port}`));
