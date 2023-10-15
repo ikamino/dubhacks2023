@@ -9,4 +9,4 @@ export class Listing {
     isAvailable: boolean;
     rating: number;
     description: string;
-}npm 
+}

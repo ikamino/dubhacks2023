@@ -1,13 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../database";
 import { Listing } from "../models/Listing";
-// import { Listing } from "../models/Listing";
-// import { User } from "../models/User";
-// import { Host } from "../models/Host";
 
-// const listingRepository = AppDataSource.getRepository(Listing);
-// const userRepository = AppDataSource.getRepository(User);
-// const hostRepository = AppDataSource.getRepository(Host);
 const mockListing1: Listing = {
     id: 1,
     title: "Parking Space",
@@ -44,10 +38,11 @@ const mockListing2:Listing = {
     rating: 5,
     description: "This is a parking space"
   }
+
+let listingsMap: Listing[] = [mockListing1,mockListing2,mockListing3]
 export const displayListing = async (req: Request, res: Response) => {
     try {
-        const listings: Listing[] = [mockListing1,mockListing2,mockListing3]
-        res.json(listings);
+        res.json(listingsMap);
     } catch (error) {
         res.status(500).json({message: "Error retrieving listings."});
     }
@@ -88,7 +83,26 @@ export const displayListing = async (req: Request, res: Response) => {
 //       await listingRepository.remove(listing);
 //       res.send("Listing deleted successfully.");
 // };
+export const createListing = async (req: Request, res: Response) => {
+    try {
+        const listing = req.body as Listing;
+        listingsMap.push(listing);
+        res.json(listing);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to create a listing." });
+    }
+}
 
+export const updateListing = async (req: Request, res: Response) => {
+    try {
+        const listing = req.body as Listing;
+        const index = listingsMap.findIndex((list) => list.id === listing.id);
+        listingsMap[index] = listing;
+        res.json(listing);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to edit listing." });
+    }
+}
 // export const createListing = async (req: Request, res: Response) => {
 //     try {
 //         const listing = req.body as Listing;
