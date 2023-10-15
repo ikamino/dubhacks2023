@@ -1,40 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const userService = require('../services/userService');
+import {Router} from 'express';
+import { listListings, createListing, deleteListing } from '../../controllers/listing';
 
-// Route for creating a listing
-router.post('/listings', async (req, res) => {
-  try {
-    const listingData = req.body;
-    if (!listingData) {
-      return res.status(400).json({ error: 'Missing listing data' });
-    }
+const router = Router();
 
-    const createdListing = await userService.createListing(listingData);
-    res.status(201).json(createdListing);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+router.route("/").get(listListings);
 
-// route to get listing data
-router.get('/listings/', async (req, res) => {
-    try {
-        const listingData = req.body;
-        if (!listingData) {
-            return res.status(400).json({ error: 'Missing listing data' });
-        }
-    
-        const createdListing = await userService.getListing(listingData);
-        res.status(201).json(createdListing);
-        } 
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-        }
-    });
+router.route("/").post(createListing);
 
-
+router.route("/:id").delete(deleteListing);
 
 module.exports = router;
