@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-
 @Entity("listings")
 export class Listing {
     @PrimaryGeneratedColumn()
@@ -8,13 +7,13 @@ export class Listing {
     @Column()
     title: string;
 
-    @Column({type: 'text'})
+    @Column()
     imageDir: string;
 
-    @Column({unique: true})
+    @Column()
     userID: number;
 
-    @Column({unique: true})
+    @Column()
     hostID: number;
 
     @Column()
@@ -24,7 +23,7 @@ export class Listing {
     pricePerHour: number;
 
     @Column()
-    isAvailable: string;
+    isAvailable: boolean;
 
     @Column()
     rating: number;
