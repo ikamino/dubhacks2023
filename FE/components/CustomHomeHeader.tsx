@@ -14,6 +14,7 @@ const HomeHeader: React.FC<HeaderProps> = ({ title, user }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<User>({id: 'temp', name: 'Undefined'})
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [isOwnerModalOpen, setIsOwnerModalOpen] = useState(false)
 
   useEffect(() => {
     setData({
@@ -35,7 +36,9 @@ const HomeHeader: React.FC<HeaderProps> = ({ title, user }) => {
         }}>
           {/* <Text style={styles.headerMessage}>Welcome back,</Text> */}
           <Text style={styles.headerMessage}>{loading ? '' : `Welcome back, ${data.name}!`}</Text>
-          <Text style={{fontSize: 12, fontWeight: '500'}}>Are you an owner?</Text>
+          <TouchableOpacity onPress={() => setIsOwnerModalOpen(true)}>
+            <Text style={{fontSize: 12, fontWeight: '500'}}>Are you an owner?</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{

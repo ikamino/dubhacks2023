@@ -106,14 +106,7 @@ const App = () => {
                 <Tab.Screen name="Log Out" children={(props) => <SignOut {...props} refetch={retrieveUser} />} />
               </Tab.Navigator>
               : <Stack.Navigator>
-                <Stack.Screen name="Sign In" children={(props) => <LinearGradient
-                colors={['#FFFCF5', '#FFF6DE', '#FFEFC6']}
-                style={{
-                padding: 25,
-                borderRadius: 20,
-                height: '100%',
-                }}
-                ><SignIn {...props} refetch={retrieveUser} /></LinearGradient>} options={{headerShown: false}}/>
+                <Stack.Screen name="Sign In" children={(props) => <SignIn {...props} refetch={retrieveUser} />} options={{headerShown: false}}/>
               </Stack.Navigator>}
           </NavigationContainer>
         }

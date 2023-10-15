@@ -4,6 +4,8 @@ import axios from 'axios';
 import Star from '../icons/star.svg'
 import Location from '../icons/Location.svg'
 import CalendarPicker from 'react-native-calendar-picker';
+import CanadianFlag from '../icons/CanadianFlag.svg'
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface ParkingLotModalProps {
     isVisible: boolean;
@@ -34,6 +36,9 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
     parkingRate: 14,
     description: 'The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience.'
   })
+
+  const [selectedDate, setSelectedDate] = useState<moment.Moment>()
+  const [selectedDuration, setSelectedDuration] = useState<string>('0')
 
   const fetchParkingLot = async () => {
     setRefreshing(true);
@@ -102,88 +107,132 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
                             <Text>{data.rating}</Text>
                         </View>
                     </View>
+                </View>
 
-                    <Text style={{fontSize: 20, fontWeight: '500', width: '100%', marginTop: 32}}>{data.title}</Text>
-
-
-                    {/* <Text style={{fontSize: 28, fontWeight: '700', width: '100%', marginTop: 12, marginBottom: 12}}>{data.title}</Text> */}
-                    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'baseline', width: '100%', marginTop: 16}}>
-                        <Text style={{fontWeight: '700', fontSize: 25}}>${data.parkingRate}</Text>
-                        <Text>/hr</Text>
-                    </View>
-                    {/* <View style={{borderBottomWidth: 1, borderColor: 'lightgrey', width: 350, marginTop: 12}}/> */}
-                    <Text style={{width: '100%', marginTop: 12, fontSize: 15, fontWeight: '500'}}>{data.description}</Text>
-                    {/* <View style={{borderBottomWidth: 1, borderColor: 'lightgrey', width: 350, marginTop: 16, marginBottom: 6}}/> */}
-                    <Text style={{fontSize: 20, fontWeight: '500', width: '100%', marginTop: 16}}>Rent a Lot</Text>
-                    <CalendarPicker
-                    // onDateChange={this.onDateChange}
-                        width={100}
-                        height={100}
-                        selectedDayColor={'#F3F3F3'}	
-                    />
+                <Text style={{fontSize: 20, fontWeight: '500', width: '100%', marginLeft: 24}}>{data.title}</Text>
+                <View style={styles.lotInfo}>
+                <View style={{display: 'flex', flexDirection: 'row', alignItems: 'baseline', width: '100%', marginTop: 16}}>
+                    <Text style={{fontWeight: '700', fontSize: 25}}>${data.parkingRate}</Text>
+                    <Text>/hr</Text>
+                </View>
+                <Text style={{width: '100%', marginTop: 12, fontSize: 15, fontWeight: '500'}}>{data.description}</Text>
+                <Text style={{fontSize: 20, fontWeight: '500', width: '100%', marginTop: 16}}>Rent a Lot</Text>
                 </View>
                 <View style={{
-                    position: 'relative',
-                    display: 'flex', 
+                    display: 'flex',
                     justifyContent: 'center',
                     alignContent: 'center',
                     alignItems: 'center',
-                    borderColor: 'black',
-                    borderRadius: 8,
-                    borderWidth: 1,
-                    width: 350,
-                    marginLeft: 24,
-                    marginBottom: 24
+                    marginTop: 16,
+                    marginBottom: 16,
+                    paddingBottom: 16,
+                    paddingRight: 24
                 }}>
-                    <View style={{
-                        display: 'flex', 
-                        width: '100%', 
-                        flexDirection: 'row', 
-                        alignItems: 'center', 
-                        marginLeft: 48,
-                        marginBottom: 24,
-                        marginTop: 12
-                    }}>
-                        <Text style={{fontSize: 20, fontWeight: '700'}}>{data.parkingRate}</Text>
-                        <Text style={{fontSize: 18}}>/Hour</Text>
+                    <CalendarPicker
+                        onDateChange={(date) => {setSelectedDate(date); console.log(date)}}
+                        width={340}
+                        height={340}
+                        todayTextStyle={{color: 'blue'}}
+                        selectedDayColor={'#B7F'}	
+                    />
+                </View>
+                <View style={{marginLeft: 24, marginRight: 24}}>
+                    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Text style={{fontSize: 15, fontWeight: '500'}}>Duration of stay (Hours)</Text>
+                        <TextInput style={styles.durationInput}
+                            value={selectedDuration}
+                            onChangeText={(text) => setSelectedDuration(text)}
+                            placeholder="Enter duration"
+                        />
                     </View>
-                    <Text style={styles.label}>Name</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={name}
-                        onChangeText={(text) => setName(text)}
-                        placeholder="Enter your name"
-                    />
-
-                    <Text style={styles.label}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={email}
-                        onChangeText={(text) => setEmail(text)}
-                        placeholder="Enter your email"
-                        keyboardType="email-address"
-                    />
-
-                    <Text style={styles.label}>Phone Number</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={phoneNumber}
-                        onChangeText={(text) => setPhoneNumber(text)}
-                        placeholder="Enter your phone number"
-                        keyboardType="phone-pad"
-                    />
-
-                    {/* <Button title="Submit" onPress={handleFormSubmit} /> */}
-                    <TouchableOpacity style={{
-                        height: 40,
-                        width: '80%',
-                        borderRadius: 50,
-                        
-                        overflow: "hidden",
-                        backgroundColor: 'blue',
+                    <Text style={{fontSize: 20, fontWeight: '500', marginTop: 26}}>Renter's Information</Text>
+                    <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginTop: 16
                     }}>
-                        <Text>Submit</Text>
-                    </TouchableOpacity>
+                        <Text style={{fontSize: 15, fontWeight: '500'}} >Name</Text>
+                        <TextInput
+                            style={{
+                                width: 268,
+                                height: 32,
+                                backgroundColor: '#F3F3F3',
+                                borderRadius: 20,
+                                marginLeft: 16,
+                                paddingLeft: 10
+                            }}
+                            value={name}
+                            onChangeText={(text) => setName(text)}
+                            placeholder="Enter your name"
+                        />
+                    </View>
+                    <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginTop: 16
+                    }}>
+                        <Text style={{fontSize: 15, fontWeight: '500'}} >Email</Text>
+                        <TextInput
+                            style={{
+                                width: 268,
+                                height: 32,
+                                backgroundColor: '#F3F3F3',
+                                borderRadius: 20,
+                                marginLeft: 16,
+                                paddingLeft: 10
+                            }}
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                            placeholder="Enter your email"
+                        />
+                    </View>
+                    <View style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        // justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginTop: 16
+                    }}>
+                        <Text style={{fontSize: 15, fontWeight: '500'}} >Phone</Text>
+                        <TouchableOpacity style={{width: 66, height: 32, backgroundColor: '#F3F3F3', alignItems:"center", justifyContent: 'center', borderRadius: 20, marginLeft: 32}}>
+                            <View style={{display: 'flex', flexDirection: 'row', alignItems:"center"}}>
+                                <CanadianFlag />
+                                <Text style={{fontSize: 15, fontWeight: '500', marginLeft: 2}}>+1</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TextInput
+                            style={{
+                                width: 120,
+                                height: 32,
+                                backgroundColor: '#F3F3F3',
+                                borderRadius: 20,
+                                marginLeft: 6,
+                                paddingLeft: 10
+                            }}
+                            value={phoneNumber}
+                            onChangeText={(text) => setPhoneNumber(text)}
+                            placeholder="XXX-XXX-XXXX"
+                        />
+                    </View>
+                    <View style={{width: '100%', alignItems: 'center'}}>
+                        <LinearGradient
+                            // Background Linear Gradient
+                            colors={["#BB77FF", '#77A5FF',  "#77FFC6"]}
+                            style={{borderRadius: 20, width: 220, height: 42, marginBottom: 82, marginTop: 32, alignItems: 'center'}}
+                        >
+                            <TouchableOpacity style={{
+                                height: 42,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <Text>Reserve</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                    </View>
                 </View>
             </ScrollView>
           </View>
@@ -272,6 +321,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 10
   },
+  durationInput: {
+    width: 166,
+    height: 32,
+    backgroundColor: '#F3F3F3',
+    borderRadius: 20,
+    marginLeft: 16,
+    paddingLeft: 10
+  }
 
 });
 
