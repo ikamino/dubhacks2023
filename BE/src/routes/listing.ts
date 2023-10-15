@@ -5,10 +5,10 @@ const router = Router();
 
 router.route("/").get(displayListing);
 
-router.route("/:companyID").delete(deleteListing);
+router.route("/:listingID").delete(deleteListing);
 
 router.route("/").post(createListing);
 
-router.route("/:companyID").put(updateListing);
+router.route("/:listingID").put(updateListing);
 
 module.exports = router;
