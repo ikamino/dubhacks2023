@@ -1,12 +1,12 @@
 export interface ListingService {
-    getListing(listingId: string): Promise<ParkingSpace>;
+    getListing(listingId: string): Promise<Listing>;
     getRating(listingId: string): Promise<Number>;
-    
+
 }
 
 
 class Listing implements ListingService {
-    async getListing(listingId: string): Promise<ParkingSpace> {
+    async getListing(listingId: string): Promise<Listing> {
         throw new Error("Method not implemented.");
     }
     async getRating(listingId: string): Promise<Number> {
