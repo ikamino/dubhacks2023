@@ -1,20 +1,24 @@
 import axios from "axios";
-export interface ListingService {
+import { AppDataSource } from "../database";
+import { Listing } from "../models/Listing";
+export interface IListingService {
     getListings(): Promise<Listing[]>;
-    getListing(listingId: string): Promise<Listing>;
+    getListing(listingId: number): Promise<Listing>;
+    createListing(listing: Listing): Promise<Listing>;
 }
 
-export class Listing implements ListingService {
+
+export class ListingService implements IListingService {
     async getListings(): Promise<Listing[]> {
         try {
-            const listing = await axios.get(`api/routes/listing`);
+            const listing = await axios.get(`http://localhost:8000/api/routes/listing`);
             return listing.data;
         } catch (error) {
             console.error(error);
             throw error;
         }
     }
-    async getListing(listingId: string): Promise<Listing> {
+    async getListing(listingId: number): Promise<Listing> {
         const listings = await this.getListings();
         if (listings) {
             for (const listing of listings) {
@@ -24,5 +28,14 @@ export class Listing implements ListingService {
             }
         }
         return null;
+    }
+    async createListing(listing: Listing): Promise<Listing> {
+        try {
+            const listingPost = await axios.post(`http://localhost:8000/routes/listing`, listing);
+            return listingPost.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 }

@@ -6,6 +6,7 @@ import Location from '../icons/Location.svg'
 import CalendarPicker from 'react-native-calendar-picker';
 import CanadianFlag from '../icons/CanadianFlag.svg'
 import { LinearGradient } from 'expo-linear-gradient';
+import ListingService from 'BE/src/services/ListingService';
 
 interface ParkingLotModalProps {
     isVisible: boolean;
@@ -42,21 +43,22 @@ const ParkingLotModal: React.FC<ParkingLotModalProps> = ({
   const [selectedDuration, setSelectedDuration] = useState<string>('0')
 
   const fetchParkingLot = async () => {
+    const listingService = new ListingService();
     setRefreshing(true);
-    // const res = await listing.getListing(id)
+    const res = await listingService.getListing(id)
     // const res = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/api/user-notifications/${user}`)
-    const res = {
-        id: 'lot3', 
-        title: 'lot3',
-        imagein: "https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        hostId: 'lot3', 
-        address: 'Seattle, Washington',
-        pricePerHour: 14,
-        isAvailable: true,
-        rating: 5.0,
-        parkingRate: 14,
-        description: "The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience."
-    }
+    // const res = {
+    //     id: 'lot3', 
+    //     title: 'lot3',
+    //     imagein: "https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    //     hostId: 'lot3', 
+    //     address: 'Seattle, Washington',
+    //     pricePerHour: 14,
+    //     isAvailable: true,
+    //     rating: 5.0,
+    //     parkingRate: 14,
+    //     description: "The highlight of this home is its large garage, boasting two parking spaces designed to comfortably accommodate two SUVs. The garage is not only spacious but also equipped with automatic doors, providing you with both security and convenience."
+    // }
 
     if (res) {
       setData(res)
