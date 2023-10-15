@@ -82,12 +82,6 @@ export const createListing = async (req: Request, res: Response) => {
         await hostRepository.save(host);
         return res.json(listing);
     } catch (error) {
-<<<<<<< HEAD
-
-=======
-        console.log(error)
-        return res.status(500).json({ error: "Failed to create a listing." });
->>>>>>> 9b045d9 (I hate my life)
     }
 };
 
