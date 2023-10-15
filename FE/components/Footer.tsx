@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import HomeIcon from '../icons/home.svg'
 import SignOutIcon from '../icons/signout.svg'
@@ -14,8 +14,16 @@ const Footer: React.FC<BottomTabBarProps> = (props) => {
             maxWidth: "100%",
             paddingLeft: 30,
             paddingRight: 30,
-            backgroundColor: '#FFFCF4',
-            height: 90
+            height: 90,
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
+            shadowColor: 'black',
+            shadowOffset: {
+                width: 30,
+                height: 60,
+            },
+            shadowOpacity: 0.85,
+            shadowRadius: 90,
         }}>
             {/* Render the default tab bar */}
             <View style={{ display: "flex", flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1, width: "100%" }}>
@@ -26,11 +34,6 @@ const Footer: React.FC<BottomTabBarProps> = (props) => {
                         style={{
                             margin: "auto", 
                             flexGrow: 1, 
-                            borderBottomWidth: state.index === index ? 2 : 0,
-                            borderColor: "black",
-                            paddingLeft: 25,
-                            paddingRight: 25,
-                            paddingBottom: 10,
                             display: "flex", 
                             alignItems: 'center', 
                             alignContent: "center", 
@@ -38,7 +41,11 @@ const Footer: React.FC<BottomTabBarProps> = (props) => {
                         }}
                     >
                         {route.name === "Home" ?
-                            <HomeIcon /> : <SignOutIcon />}
+                            <Image style={state.index == index ? {tintColor: '#AB30E4'}: {}}source={require(`../icons/SearchIcon.png`)} />:
+                            route.name === "Inbox" ?
+                                <Image style={state.index == index ? {tintColor: '#AB30E4'}: {}}source={require(`../icons/ChatIcon.png`)} /> :
+                                route.name === "Profile" ?
+                                    <Image style={state.index == index ? {tintColor: '#AB30E4'}: {}}source={require(`../icons/UserIcon.png`)} /> : <SignOutIcon />}
                     </TouchableOpacity>
                 ))}
             </View>

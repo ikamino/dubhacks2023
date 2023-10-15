@@ -30,6 +30,7 @@ const MyTheme = {
 
 const App = () => {
   const [user, setUser] = useState<string | undefined>();
+  const [lot, setLot] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
 
   const retrieveUser = async () => {
@@ -48,6 +49,22 @@ const App = () => {
     setIsLoading(false);
   };
 
+  const retrieveParkingLot = async () => {
+    setIsLoading(true);
+    try {
+      const value = await AsyncStorage.getItem('lot');
+      if (value !== null) {
+        // We have data!!
+        setLot(value);
+      } else {
+        setLot(undefined); 
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     retrieveUser();
   }, []);
@@ -62,19 +79,30 @@ const App = () => {
             {user ?
               <Tab.Navigator screenOptions={{
                 headerStyle: {
-                  backgroundColor: '#FFFCF4'
+                  backgroundColor: 'white',
                 }, headerShown: true
               }} tabBar={(props) => <Footer {...props} />}>
                 <Tab.Screen name="Home" options={{
                   headerTitle: () => <HomeHeader title='hi' user={user} />, headerStyle: {
                     elevation: 0,
-                    shadowOpacity: 0,
-                    borderBottomWidth: 0,
-                    backgroundColor: '#FFFCF4'
+                    // borderBottomWidth: 0,
+                    // backgroundColor: 'blue',
+                    height: 200,
+                    borderBottomLeftRadius: 25,
+                    borderBottomRightRadius: 25,
+                    shadowColor: '#212121',
+                    shadowOffset: {
+                        width: 0,
+                        height: 4,
+                    },
+                    shadowOpacity: 0.15,
+                    shadowRadius: 4,
                   }
                 }}>
-                  {(props) => <Home user={user} />}
+                  {(props) => <Home user={user} refetch={retrieveParkingLot}/>}
                 </Tab.Screen>
+                <Tab.Screen name="Inbox" children={(props) => <View></View>}/>
+                <Tab.Screen name="Profile" children={(props) => <View></View>}/>
                 <Tab.Screen name="Log Out" children={(props) => <SignOut {...props} refetch={retrieveUser} />} />
               </Tab.Navigator>
               : <Stack.Navigator>
