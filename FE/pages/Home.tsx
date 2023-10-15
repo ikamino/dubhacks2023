@@ -144,7 +144,7 @@ const Home = ({ user, refetch }: IHome) => {
                         justifyContent: "center" 
                     }}>
                             <LotList lots={lots} selectLot={selectParkingLot}/>
-                            <ParkingLotModal id={selectedParkinglot} isVisible={isParkingLotModalOpen} onClose={() => setIsParkingLotModalOpen(false)}/>
+                            <ParkingLotModal id={selectedParkinglot} isVisible={isParkingLotModalOpen} data={lots} onClose={() => setIsParkingLotModalOpen(false)}/>
                         
                     </View>
                 </>

@@ -40,18 +40,18 @@ const mockListing2 = {
   description: "This is a parking space"
 }
 
-import axios from "axios";
-const listing = axios.get(`http://localhost:8000/routes/listing`).then((res) => {
-  console.log(res.data);
-});
+// import axios from "axios";
+// const listing = axios.get(`http://localhost:8000/routes/listing`).then((res) => {
+//   console.log(res.data);
+// });
 
-const listing2 = axios.post(`http://localhost:8000/routes/listing`, mockListing).then((res) => {
-  console.log(res.data);
-});
-const listing3 = axios.put(`http://localhost:8000/routes/listing`, mockListing2).then((res) => {
-  console.log(res.data);
-});
-const listing4 = axios.get(`http://localhost:8000/routes/listing`).then((res) => {
-  console.log(res.data);
-});
+// const listing2 = axios.post(`http://localhost:8000/routes/listing`, mockListing).then((res) => {
+//   console.log(res.data);
+// });
+// const listing3 = axios.put(`http://localhost:8000/routes/listing`, mockListing2).then((res) => {
+//   console.log(res.data);
+// });
+// const listing4 = axios.get(`http://localhost:8000/routes/listing`).then((res) => {
+//   console.log(res.data);
+// });
 

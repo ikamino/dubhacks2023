@@ -17,12 +17,13 @@ import Location from "../icons/Location.svg";
 import CalendarPicker from "react-native-calendar-picker";
 import CanadianFlag from "../icons/CanadianFlag.svg";
 import { LinearGradient } from "expo-linear-gradient";
+import { ParkingSpace } from "../types/types";
 
 interface ParkingLotModalProps {
   isVisible: boolean;
   onClose: () => void;
   id: string | undefined;
-  
+  data: ParkingSpace[]
 }
 
 const TOP_MARGIN = 0; // Adjust this value as needed
