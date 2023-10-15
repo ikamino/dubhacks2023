@@ -23,9 +23,9 @@ export class HostService implements HostServiceInterface {
         }
     }
 
-    async getListing(listingId: string): Promise<Listing> {
+    async getListings(): Promise<Listing> {
         try {
-            const listing = await axios.get(`api/routes/listing/${listingId}`);
+            const listing = await axios.get(`api/routes/listing`);
             return listing.data;
         } catch (error) {
             console.error(error);
