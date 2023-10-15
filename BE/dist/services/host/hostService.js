@@ -18,7 +18,7 @@ class HostService {
     createListing(listing) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const createdListing = yield axios_1.default.post('api/routes/listing', listing);
+                const createdListing = yield axios_1.default.post('http://localhost:8000/api/routes/listing', listing);
                 return createdListing.data;
             }
             catch (error) {

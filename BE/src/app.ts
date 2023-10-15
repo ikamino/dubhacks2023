@@ -7,8 +7,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const port = 3000;
-
-const uri = 'mongodb+srv://ikamino:' + process.env.MONGODB_PASSWORD + '@dubhacks2023.vjneweq.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://ikamino:6cIQ08LdpaKdnnov@dubhacks2023.vjneweq.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -23,6 +22,10 @@ db.once('open', () => {
   console.log('Successfully connected to MongoDB database');
 });
 
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+
 const host = new HostService();
 host
   .createListing(mockListing)
@@ -33,6 +36,4 @@ host
     console.error('Error creating listing:', error);
   });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+

@@ -5,7 +5,7 @@ import axios from 'axios';
 export class HostService implements HostServiceInterface {
     async createListing(listing: Listing): Promise<Listing> {
         try {
-            const createdListing = await axios.post('api/routes/listing', listing);
+            const createdListing = await axios.post('http://localhost:8000/api/routes/listing', listing);
             return createdListing.data;
         } catch (error) {
             console.error(error);
