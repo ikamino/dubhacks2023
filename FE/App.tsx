@@ -87,7 +87,7 @@ const App = () => {
                     elevation: 0,
                     // borderBottomWidth: 0,
                     // backgroundColor: 'blue',
-                    height: 200,
+                    height: 180,
                     borderBottomLeftRadius: 25,
                     borderBottomRightRadius: 25,
                     shadowColor: '#212121',

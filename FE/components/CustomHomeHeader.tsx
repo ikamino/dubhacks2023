@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'reac
 import { User } from '../types/types';
 import FilterIcon from '../icons/Slider.svg'
 import FilterModal from './filterModal';
+import OwnerModal from './OwnerModal';
 
 interface HeaderProps {
   title: string;
@@ -62,8 +63,8 @@ const HomeHeader: React.FC<HeaderProps> = ({ title, user }) => {
           <TextInput style={{
           width: 240, 
           height: 32, 
-          paddingLeft: 10
-          }}/>
+          paddingLeft: 10,
+          }}placeholder='Search'/>
           <TouchableOpacity onPress={() => setIsFilterModalOpen(true)}>
             <FilterIcon />
           </TouchableOpacity>
@@ -83,6 +84,7 @@ const HomeHeader: React.FC<HeaderProps> = ({ title, user }) => {
         </TouchableOpacity>
       </View>
       <FilterModal isVisible={isFilterModalOpen} onClose={() => setIsFilterModalOpen(false)} />
+      <OwnerModal isVisible={isOwnerModalOpen} onClose={() => setIsOwnerModalOpen(false)} id={'hihi'}/>
     </View>
   );
 };
@@ -94,7 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // Vertically align text
     alignItems: "center",
     width: '100%',
-    marginTop: 26,
     // backgroundColor: 'green'
   },
   headerUserInfo: {

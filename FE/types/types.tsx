@@ -9,7 +9,8 @@ export type ParkingSpace = {
     reservedBy?: string,
     rating: number,
     parkingRate: number,
-    description: string
+    description: string,
+    tags: string[]
 }
 
 export type User = {
